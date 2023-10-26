@@ -6,6 +6,9 @@ on:
     paths-ignore:
       - "charts/**"
       - "k8s/**"
+permissions:
+  contents: write
+  packages: write
 env:
   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 jobs:
