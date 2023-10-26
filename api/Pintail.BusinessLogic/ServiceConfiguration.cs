@@ -10,7 +10,6 @@ public static class ServiceConfiguration {
   public static IServiceCollection AddBusinessLogicServices(this IServiceCollection services, IConfiguration configuration) {
     services.AddHttpClient();
 
-    services.Configure<SettingOptions>(configuration.GetSection("Pintail:Settings"));
 
     services.AddMediatR(config => {
       config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());

@@ -1,6 +1,6 @@
 using System.Reflection;
-using Pintail.BusinessLogic.Sites;
 using Microsoft.AspNetCore.WebSockets;
+using Pintail.WebApi.Routes;
 
 namespace Pintail.WebApi;
 
@@ -41,7 +41,6 @@ public static class ServiceConfiguration {
   }
 
   private static IServiceCollection AddOptions(this IServiceCollection services, IConfiguration configuration) {
-    services.Configure<PintailConfig>(configuration.GetSection("Pintail"));
     // TODO: Setup option configuration.
     return services;
   }
