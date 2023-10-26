@@ -1,4 +1,3 @@
-using Pintail.Domain.Aggregates.SiteAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -30,9 +29,5 @@ public class DataSeeder : IDataSeeder {
       await _dbContext.SaveChangesAsync();
     }
   }
-
-  // public List<Site> GetSites() => new() {
-  //   new Site(Guid.NewGuid(), "Site 1", new Uri("http://localhost:4530")),
-  // };
 
 }
