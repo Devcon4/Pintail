@@ -75,7 +75,7 @@
             "development": {
               "browserTarget": "pintail:build:development",
               "proxyConfig": "./proxy.config.js",
-              "port": 4540
+              "port": 4640
             }
           },
           "defaultConfiguration": "development"

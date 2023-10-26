@@ -3,7 +3,7 @@ services:
   seq:
     image: datalust/seq:latest
     ports:
-      - '4520:80'
+      - '4620:80'
     networks:
       - pintail
     environment:
