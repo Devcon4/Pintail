@@ -4,13 +4,18 @@ using Pintail.Domain.Core;
 namespace Pintail.Domain.Aggregates.Board;
 
 public class Board: BaseEntity<Guid>, IAggregateRoot {
-  public Guid ShortGuid { get; set; }
+  public ShortGuid ShortGuid { get; set; }
 
   private HashSet<Card> _cards { get; set; } = [];
   public FrozenSet<Card> Cards => _cards.ToFrozenSet();
 
   private HashSet<Label> _labels { get; set; } = [];
   public FrozenSet<Label> Labels => _labels.ToFrozenSet();
+
+  public Board() {
+    Id = Guid.NewGuid();
+    ShortGuid = new ShortGuid(Id);
+  }
 
   void AddCard(Card card) {
     _cards.Add(card);
