@@ -1,9 +1,0 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-  - "pintail.ingress.yml"
-helmCharts:
-  - name: pintail
-    namespace: pintail
-    repo: https://devcon4.github.io/pintail
-    releaseName: pintail

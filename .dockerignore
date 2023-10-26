@@ -1,9 +1,0 @@
-**/bin
-**/obj
-**/.vs
-**/.vscode
-**/.github
-**/appsettings.Development.json
-**/node_modules
-**/dist
-**/publish
