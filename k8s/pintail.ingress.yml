@@ -1,0 +1,33 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: pintail-cyphers-dev-cert
+spec:
+  dnsNames:
+    - pintail.cyphers.dev
+  secretName: pintail-cyphers-dev-cert
+  issuerRef:
+    name: digitalocean-issuer
+    kind: ClusterIssuer
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: pintail-ingress
+  annotations:
+    pintail.cyphers.dev/group: Sites
+    pintail.cyphers.dev/name: pintail
+    pintail.cyphers.dev/tags: production,pintail
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: pintail-cyphers-dev-cert
+  routes:
+    - match: Host(`pintail.cyphers.dev`)
+      kind: Rule
+      services:
+        - kind: Service
+          name: pintail
+          namespace: pintail
+          port: 4240
