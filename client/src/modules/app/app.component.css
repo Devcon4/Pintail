@@ -1,0 +1,24 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 100vh;
+  background-image: paint(fleck);
+
+  --clr1: var(--light, var(--pin13)) var(--dark, var(--pin7));
+  --clr2: var(--light, var(--pin14)) var(--dark, var(--pin9));
+  --clr3: var(--light, var(--pin12)) var(--dark, var(--pin8));
+  --clr4: var(--light, #bebebe) var(--dark, var(--pin10));
+  --clr5: var(--light, var(--pin12)) var(--dark, var(--pin11));
+  --clr6: var(--light, var(--pin15)) var(--dark, #516f85);
+  --fleck-colors: var(--clr1) var(--clr2) var(--clr3) var(--clr4) var(--clr5) var(--clr6);
+  --fleck-seed: 124;
+  --fleck-cell-size: 150;
+  --fleck-size-base: 5;
+  --fleck-density: 15;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+}

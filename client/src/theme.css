@@ -1,0 +1,64 @@
+@media (prefers-color-scheme: light) {
+  html {
+      --light: var(--on);
+      --dark: var(--off);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+      --light: var(--off);
+      --dark: var(--on);
+  }
+}
+
+body {
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+
+  color: var(--pin-on-background);
+  background-color: var(--pin-background);
+
+  --pin0: #1f2328;
+  --pin1: #2e3640;
+  --pin2: #23272e;
+  --pin3: #191c20;
+
+  --pin4: #eeeff2;
+  --pin5: #f5f7fa;
+  --pin6: #eef0f3;
+
+  --pin7: #df702b;
+  --pin8: #33648a;
+  --pin9: #d5614d;
+  --pin10: #61a6cb;
+
+  --pin11: #de983c;
+  --pin12: #f5f518;
+  --pin13: #03a2d3;
+  --pin14: #74d8e6;
+  --pin15: #1d2f35;
+
+  --pin-primary:           var(--light, var(--pin13))  var(--dark, var(--pin10));
+  --pin-primary-variant:   var(--light, var(--pin14))  var(--dark, var(--pin7));
+  --pin-secondary:         var(--light, var(--pin12))  var(--dark, var(--pin10));
+  --pin-background:        var(--light, var(--pin6))  var(--dark, var(--pin0));
+  --pin-surface:           var(--light, var(--pin5))  var(--dark, var(--pin1));
+  --pin-surface-secondary: var(--light, var(--pin4))  var(--dark, var(--pin2));
+  --pin-warning:           var(--light, var(--pin11)) var(--dark, var(--pin7));
+  --pin-error:             var(--light, var(--pin12)) var(--dark, var(--pin9));
+  --pin-disabled:          var(--light, var(--pin0)) var(--dark, var(--pin0));
+  --pin-dark:              var(--light, var(--pin0)) var(--dark, var(--pin0));
+  --pin-active:            var(--light, var(--pin11)) var(--dark, var(--pin11));
+  --pin-active-variant:    var(--light, var(--pin13)) var(--dark, var(--pin13));
+  --pin-on-primary:        var(--light, var(--pin4))  var(--dark, var(--pin4));
+  --pin-on-secondary:      var(--light, var(--pin4))  var(--dark, var(--pin4));
+  --pin-on-background:     var(--light, var(--pin2))  var(--dark, var(--pin4));
+  --pin-on-surface:        var(--light, var(--pin2))  var(--dark, var(--pin4));
+  --pin-on-warning:        var(--light, var(--pin4))  var(--dark, var(--pin4));
+  --pin-on-error:          var(--light, var(--pin4))  var(--dark, var(--pin4));
+
+  --md-sys-color-primary: var(--pin-primary);
+  --md-sys-color-on-surface-variant: var(--pin-on-surface);
+}
