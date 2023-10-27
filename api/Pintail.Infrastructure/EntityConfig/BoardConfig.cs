@@ -9,6 +9,10 @@ public class BoardConfig : IEntityTypeConfiguration<Board>
 {
   public void Configure(EntityTypeBuilder<Board> builder) {
     builder.Property(b => b.Id).ValueGeneratedNever();
+    builder.Property(b => b.Title).HasConversion(
+      v => v.Value,
+      v => new TextLine(v)
+    ).HasColumnName("title");
     builder.Property(b => b.ShortGuid).HasConversion(
       v => v.Key,
       v => new ShortGuid(v)

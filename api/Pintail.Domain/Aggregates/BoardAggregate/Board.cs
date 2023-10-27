@@ -6,6 +6,7 @@ namespace Pintail.Domain.Aggregates.BoardAggregate;
 
 public class Board: BaseEntity<Guid>, IAggregateRoot {
   public ShortGuid ShortGuid { get; set; }
+  public TextLine Title { get; set; }
 
   private List<Card> _cards { get; set; } = [];
   public IEnumerable<Card> Cards => _cards.AsEnumerable();
@@ -13,9 +14,13 @@ public class Board: BaseEntity<Guid>, IAggregateRoot {
   private List<Label> _labels { get; set; } = [];
   public IEnumerable<Label> Labels => _labels.AsEnumerable();
 
-  public Board() {
+  private Board() {
     Id = Guid.NewGuid();
     ShortGuid = new ShortGuid(Id);
+  }
+
+  public Board(TextLine title): this() {
+    Title = title;
   }
 
   public Board(IEnumerable<Card> cards, IEnumerable<Label> labels): this() {

@@ -6,6 +6,7 @@ public class TextLine : ValueObject
 {
   private readonly string Body;
 
+  public string Value => Body;
   public TextLine(string Body) {
     this.Body = Body.Replace("\n", "").Replace("\r", "");
   }

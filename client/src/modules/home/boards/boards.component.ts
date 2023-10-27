@@ -31,6 +31,7 @@ export default class BoardsComponent {
     CustomOperators.IsDefinedSingle(),
     map((l) =>
       l.map((b) => ({
+        title: b.title,
         path: `/workbench/${b.key}`,
         label: b.key,
       }))

@@ -9,7 +9,7 @@
   <h2 class="header">Boards</h2>
   <div class="links">
     <ng-container *ngFor="let board of boards | async">
-      <div class="board"><a [routerLink]="board.path">{{ board.label }}</a></div>
+      <div class="board"><h3>{{board.title}}</h3><a [routerLink]="board.path">{{ board.label }}</a></div>
     </ng-container>
   </div>
 </div>

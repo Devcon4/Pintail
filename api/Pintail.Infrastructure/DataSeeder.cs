@@ -33,9 +33,9 @@ public class DataSeeder : IDataSeeder {
     }
   }
 
-  public Board Board1 = new();
-  public Board Board2 = new();
-  public Board Board3 = new();
+  public Board Board1 = new(new TextLine("Board 1"));
+  public Board Board2 = new(new TextLine("Board 2"));
+  public Board Board3 = new(new TextLine("Board 3"));
 
   public Board SeedBoard(Board board) {
     board.AddCard(new (board, new Position(0, 0), new TextMultiline("Card 1")));

@@ -34,4 +34,5 @@ export class BoardState {
 export type Board = {
   id: string;
   key: string;
+  title: string;
 };
