@@ -1,4 +1,4 @@
-using Pintail.Domain.Aggregates.Board;
+using Pintail.Domain.Aggregates.BoardAggregate;
 
 namespace Pintail.BusinessLogic.Boards;
 

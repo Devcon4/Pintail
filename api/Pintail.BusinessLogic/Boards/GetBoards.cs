@@ -1,6 +1,6 @@
 using Ardalis.Specification;
 using MediatR;
-using Pintail.Domain.Aggregates.Board;
+using Pintail.Domain.Aggregates.BoardAggregate;
 using Pintail.Domain.Core;
 
 namespace Pintail.BusinessLogic.Boards;

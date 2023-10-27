@@ -1,7 +1,8 @@
 using System.Collections.Frozen;
 using Pintail.Domain.Core;
+using Pintail.Domain.ValueObjects;
 
-namespace Pintail.Domain.Aggregates.Board;
+namespace Pintail.Domain.Aggregates.BoardAggregate;
 
 public class Board: BaseEntity<Guid>, IAggregateRoot {
   public ShortGuid ShortGuid { get; set; }
@@ -17,19 +18,30 @@ public class Board: BaseEntity<Guid>, IAggregateRoot {
     ShortGuid = new ShortGuid(Id);
   }
 
-  void AddCard(Card card) {
+  public Board(IEnumerable<Card> cards, IEnumerable<Label> labels): this() {
+
+    foreach (var card in cards) {
+      AddCard(card);
+    }
+
+    foreach (var label in labels) {
+      AddLabel(label);
+    }
+  }
+
+  public void AddCard(Card card) {
     _cards.Add(card);
   }
 
-  void RemoveCard(Card card) {
+  public void RemoveCard(Card card) {
     _cards.Remove(card);
   }
 
-  void AddLabel(Label label) {
+  public void AddLabel(Label label) {
     _labels.Add(label);
   }
 
-  void RemoveLabel(Label label) {
+  public void RemoveLabel(Label label) {
     _labels.Remove(label);
   }
 }
