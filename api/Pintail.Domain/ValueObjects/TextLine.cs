@@ -1,6 +1,6 @@
 using Pintail.Domain.Core;
 
-namespace Pintail.Domain.Aggregates;
+namespace Pintail.Domain.ValueObjects;
 
 public class TextLine : ValueObject
 {

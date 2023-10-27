@@ -7,11 +7,11 @@ namespace Pintail.Domain.Aggregates.BoardAggregate;
 public class Board: BaseEntity<Guid>, IAggregateRoot {
   public ShortGuid ShortGuid { get; set; }
 
-  private HashSet<Card> _cards { get; set; } = [];
-  public FrozenSet<Card> Cards => _cards.ToFrozenSet();
+  private List<Card> _cards { get; set; } = [];
+  public IEnumerable<Card> Cards => _cards.AsEnumerable();
 
-  private HashSet<Label> _labels { get; set; } = [];
-  public FrozenSet<Label> Labels => _labels.ToFrozenSet();
+  private List<Label> _labels { get; set; } = [];
+  public IEnumerable<Label> Labels => _labels.AsEnumerable();
 
   public Board() {
     Id = Guid.NewGuid();

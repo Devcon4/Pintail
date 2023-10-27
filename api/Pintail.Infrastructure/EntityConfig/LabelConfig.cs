@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Pintail.Domain.Aggregates;
+using Pintail.Domain.Aggregates.BoardAggregate;
+using Pintail.Domain.ValueObjects;
 
 namespace Pintail.Infrastructure.EntityConfig;
 

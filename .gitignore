@@ -2,3 +2,4 @@
 **/bin
 **/Pintail.db*
 /client/.angular
+/api/Pintail.WebApi/Pintail.sqlite
