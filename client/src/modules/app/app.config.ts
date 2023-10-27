@@ -10,6 +10,7 @@ import BaseUriHandler from '../../services/base-uri.handler';
 import { ConfigService } from '../../services/config.service';
 import { PaintService } from '../../services/paint.service';
 import { routes } from './app.routes';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 const startupConfig = (configService: ConfigService) => {
   return () => configService.load();
@@ -23,17 +24,18 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     {
-      provide: APP_INITIALIZER,
-      useFactory: startupConfig,
-      deps: [ConfigService],
-      multi: true,
+        provide: APP_INITIALIZER,
+        useFactory: startupConfig,
+        deps: [ConfigService],
+        multi: true,
     },
     {
-      provide: APP_INITIALIZER,
-      useFactory: startupPaint,
-      deps: [PaintService],
-      multi: true,
+        provide: APP_INITIALIZER,
+        useFactory: startupPaint,
+        deps: [PaintService],
+        multi: true,
     },
     provideHttpClient(withInterceptors([BaseUriHandler])),
-  ],
+    provideAnimations()
+],
 };

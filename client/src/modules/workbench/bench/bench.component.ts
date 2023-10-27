@@ -13,7 +13,7 @@ import { CardState } from '../../../states/card.state';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './bench.component.html',
-  styleUrls: ['./bench.component.css'],
+  styleUrls: ['./bench.component.scss'],
 })
 export default class BenchComponent {
   constructor(

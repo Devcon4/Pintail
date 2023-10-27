@@ -1,0 +1,472 @@
+
+// Custom theme setup for Angular projects.
+// Based on a 0-15 color palette similar to Nord https://www.nordtheme.com/docs/colors-and-palettes
+// For more information: https://material.angular.io/guide/theming
+// @import '~@angular/material/theming';
+@use '@angular/material' as mat;
+
+@import "@angular/material/theming";
+
+// TO USE:
+// 1. Set the colors below to yours. It is suggested to follow a similar pattern as Nord.
+// 2. Import into your styles.scss (@import 'theme.scss';)
+// 3. Call the entrypoint with your project name. (@include create-project(my-project);)
+// 4. ðŸŽ¨ You may need to tweek configuration in here based on the colors you have selected, the main areas are marked with ðŸŽ¨.
+
+// Entry point. Sets the name of the project and sets theme switching.
+// Example @include create-project(my-test);
+// By default we will use the users prefered color theme but this can be disabled.
+@mixin create-project($name, $switching: true) {
+    //TODO: Create a way to override the theme so you can hook up a button to switch it.
+    // Allow theme switching based on user preference.
+    @if $switching {
+        @media (prefers-color-scheme: light) {
+            html {
+                @include theme-mixin($name, light);
+                --light: var(--on);
+                --dark: var(--off);
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            html {
+                @include theme-mixin($name, dark);
+                --light: var(--off);
+                --dark: var(--on);
+            }
+        }
+    } @else {
+
+        // Defaults to light theme.
+        html {
+            @include theme-mixin($name, light);
+            --light: var(--on);
+            --dark: var(--off);
+       }
+    }
+  }
+
+// Mixin that generates a theme.
+// Creates global css variables 0-15 for your custom code to use.
+// Sets up material to use your css variable colors. They are bound so if you update the variable it will update the material styles.
+// It is setup to take a theming preference of light/dark but could have multiple preferences depending on use case.
+@mixin theme-mixin($name, $theme-preference) {
+
+  $main-typography: mat.define-typography-config(
+    $font-family: "Roboto, Arial, san-serif",
+    $headline-6:
+      mat.define-typography-level(
+        $font-family: 'Roboto, Arial, san-serif',
+        $font-size: 20px,
+        $line-height: 25px,
+        $font-weight: 600,
+      ),
+    $subtitle-1:
+      mat.define-typography-level(
+        $font-family: 'Roboto, Arial, san-serif',
+        $font-size: 18px,
+        $line-height: 23px,
+        $font-weight: 500,
+        //medium
+      ),
+    $subtitle-2:
+      mat.define-typography-level(
+        $font-family: "Roboto, Arial, san-serif",
+        $font-size: 16px,
+        $line-height: 20px,
+        $font-weight: 500,
+      ),
+    $body-1:
+      mat.define-typography-level(
+        $font-family: "Roboto, Arial, san-serif",
+        $font-size: 16px,
+        $font-weight: 400,
+        $line-height: 24px,
+      ),
+    $body-2:
+      mat.define-typography-level(
+        $font-family: "Roboto, Arial, san-serif",
+        $font-size: 14px,
+        $font-weight: 400,
+        $line-height: 20px,
+      ),
+    $button:
+      mat.define-typography-level(
+        $font-family: Quicksand,
+        $font-size: 14px,
+        $font-weight: 500,
+        $line-height: 19px,
+      ),
+  );
+
+  @include mat.all-component-typographies($main-typography);
+    @include mat.core();
+
+    body {
+
+        color: var(--#{$name}-on-background);
+        background-color: var(--#{$name}-background);
+        // Setup colors.
+        // ðŸŽ¨ Change these to whatever colors you want.
+        // // Dark colors.
+        // --#{$name}0: #202426;
+        // --#{$name}1: #2F353D;
+        // --#{$name}2: rgb(41 44 50);;
+        // --#{$name}3: #2B3850;
+
+        // // Light colors.
+        // --#{$name}4: #F5F5F5;
+        // --#{$name}5: #FDFDFD;
+        // --#{$name}6: #EBEBEB;
+
+        // // Primary colors.
+        // --#{$name}7: rgb(140, 17, 248);
+        // --#{$name}8: rgb(225, 10, 98);
+        // --#{$name}9: rgb(17, 235, 248);
+        // --#{$name}10: rgb(255, 255, 255);
+
+        // // Action colors.
+        // --#{$name}11: rgb(234, 235, 27);
+        // --#{$name}12: rgb(234, 235, 27);
+        // --#{$name}13: rgb(68, 168, 205);
+        // --#{$name}14: rgb(125, 210, 249);
+        // --#{$name}15: rgb(169, 49, 43);
+        // Dark colors.
+        --#{$name}0: #1f2328;
+        --#{$name}1: #2e3640;
+        --#{$name}2: #23272e;
+        --#{$name}3: #191c20;
+
+        // Light colors.
+        --#{$name}4: #eeeff2;
+        --#{$name}5: #f5f7fa;
+        --#{$name}6: #eef0f3;
+
+        // Primary colors.
+        --#{$name}7: #df702b;
+        --#{$name}8: #33648a;
+        --#{$name}9: #d5614d;
+        --#{$name}10: #61a6cb;
+
+        // Action colors.
+        --#{$name}11: #de983c;
+        --#{$name}12: #f5f518;
+        --#{$name}13: #03a2d3;
+        --#{$name}14: #74d8e6;
+        --#{$name}15: #1d2f35;
+
+        --#{$name}-primary:           var(--light, var(--#{$name}13))  var(--dark, var(--#{$name}9));
+        --#{$name}-primary-variant:   var(--light, var(--#{$name}14))  var(--dark, var(--#{$name}7));
+        --#{$name}-secondary:         var(--light, var(--#{$name}12))  var(--dark, var(--#{$name}10));
+        --#{$name}-background:        var(--light, var(--#{$name}6))  var(--dark, var(--#{$name}0));
+        --#{$name}-surface:           var(--light, var(--#{$name}5))  var(--dark, var(--#{$name}1));
+        --#{$name}-surface-secondary: var(--light, var(--#{$name}4))  var(--dark, var(--#{$name}2));
+        --#{$name}-warning:           var(--light, var(--#{$name}11)) var(--dark, var(--#{$name}11));
+        --#{$name}-error:             var(--light, var(--#{$name}14)) var(--dark, var(--#{$name}14));
+        --#{$name}-disabled:          var(--light, var(--#{$name}0)) var(--dark, var(--#{$name}0));
+        --#{$name}-dark:              var(--light, var(--#{$name}0)) var(--dark, var(--#{$name}0));
+        --#{$name}-active:            var(--light, var(--#{$name}11)) var(--dark, var(--#{$name}11));
+        --#{$name}-active-variant:    var(--light, var(--#{$name}13)) var(--dark, var(--#{$name}13));
+        --#{$name}-on-primary:        var(--light, var(--#{$name}4))  var(--dark, var(--#{$name}4));
+        --#{$name}-on-secondary:      var(--light, var(--#{$name}4))  var(--dark, var(--#{$name}4));
+        --#{$name}-on-background:     var(--light, var(--#{$name}2))  var(--dark, var(--#{$name}4));
+        --#{$name}-on-surface:        var(--light, var(--#{$name}7))  var(--dark, var(--#{$name}2));
+        --#{$name}-on-warning:        var(--light, var(--#{$name}4))  var(--dark, var(--#{$name}4));
+        --#{$name}-on-error:          var(--light, var(--#{$name}4))  var(--dark, var(--#{$name}4));
+
+        // Create maps for each color group to be used by material.
+        // 50-900 are shades material will use. Technically this should be shades but 4 colors should cover almost every usecase. I also might not have linear shades.
+        // A100-A700 are alternatives that some components can use.
+        // Contrast maps what color text should appear on each color.
+        // ðŸŽ¨ You might have to tweek these values depending on what colors you picked.
+        $primary: (
+            50: var(--#{$name}-primary),
+            100: var(--#{$name}-primary),
+            200: var(--#{$name}-primary),
+            300: var(--#{$name}-primary),
+            400: var(--#{$name}-primary),
+            500: var(--#{$name}-primary),
+            600: var(--#{$name}-primary),
+            700: var(--#{$name}-primary),
+            800: var(--#{$name}-primary),
+            900: var(--#{$name}-primary),
+            A100: var(--#{$name}-primary),
+            A200: var(--#{$name}-primary),
+            A400: var(--#{$name}-primary),
+            A700: var(--#{$name}-primary),
+            contrast: (
+                50: var(--#{$name}-on-primary),
+                100: var(--#{$name}-on-primary),
+                200: var(--#{$name}-on-primary),
+                300: var(--#{$name}-on-primary),
+                400: var(--#{$name}-on-primary),
+                500: var(--#{$name}-on-primary),
+                600: var(--#{$name}-on-primary),
+                700: var(--#{$name}-on-primary),
+                800: var(--#{$name}-on-primary),
+                900: var(--#{$name}-on-primary),
+                A100: var(--#{$name}-on-primary),
+                A200: var(--#{$name}-on-primary),
+                A400: var(--#{$name}-on-primary),
+                A700: var(--#{$name}-on-primary),
+            )
+        );
+
+        $secondary: (
+            50: var(--#{$name}-secondary),
+            100: var(--#{$name}-secondary),
+            200: var(--#{$name}-secondary),
+            300: var(--#{$name}-secondary),
+            400: var(--#{$name}-secondary),
+            500: var(--#{$name}-secondary),
+            600: var(--#{$name}-secondary),
+            700: var(--#{$name}-secondary),
+            800: var(--#{$name}-secondary),
+            900: var(--#{$name}-secondary),
+            A100: var(--#{$name}-secondary),
+            A200: var(--#{$name}-secondary),
+            A400: var(--#{$name}-secondary),
+            A700: var(--#{$name}-secondary),
+            contrast: (
+                50: var(--#{$name}-on-secondary),
+                100: var(--#{$name}-on-secondary),
+                200: var(--#{$name}-on-secondary),
+                300: var(--#{$name}-on-secondary),
+                400: var(--#{$name}-on-secondary),
+                500: var(--#{$name}-on-secondary),
+                600: var(--#{$name}-on-secondary),
+                700: var(--#{$name}-on-secondary),
+                800: var(--#{$name}-on-secondary),
+                900: var(--#{$name}-on-secondary),
+                A100: var(--#{$name}-on-secondary),
+                A200: var(--#{$name}-on-secondary),
+                A400: var(--#{$name}-on-secondary),
+                A700: var(--#{$name}-on-secondary),
+            )
+        );
+
+        $dark: (
+            50: var(--#{$name}1),
+            100: var(--#{$name}1),
+            200: var(--#{$name}1),
+            300: var(--#{$name}1),
+            400: var(--#{$name}0),
+            500: var(--#{$name}0),
+            600: var(--#{$name}0),
+            700: var(--#{$name}2),
+            800: var(--#{$name}2),
+            900: var(--#{$name}3),
+            A100: var(--#{$name}2),
+            A200: var(--#{$name}2),
+            A400: var(--#{$name}2),
+            A700: var(--#{$name}3),
+            contrast: (
+                50: var(--#{$name}6),
+                100: var(--#{$name}6),
+                200: var(--#{$name}6),
+                300: var(--#{$name}6),
+                400: var(--#{$name}6),
+                500: var(--#{$name}6),
+                600: var(--#{$name}6),
+                700: var(--#{$name}6),
+                800: var(--#{$name}6),
+                900: var(--#{$name}6),
+                A100: var(--#{$name}6),
+                A200: var(--#{$name}6),
+                A400: var(--#{$name}6),
+                A700: var(--#{$name}6),
+            )
+        );
+
+        $light: (
+            50: var(--#{$name}6),
+            100: var(--#{$name}6),
+            200: var(--#{$name}6),
+            300: var(--#{$name}6),
+            400: var(--#{$name}6),
+            500: var(--#{$name}6),
+            600: var(--#{$name}6),
+            700: var(--#{$name}4),
+            800: var(--#{$name}4),
+            900: var(--#{$name}5),
+            A100: var(--#{$name}5),
+            A200: var(--#{$name}5),
+            A400: var(--#{$name}5),
+            A700: var(--#{$name}5),
+            contrast: (
+                50: var(--#{$name}0),
+                100: var(--#{$name}0),
+                200: var(--#{$name}0),
+                300: var(--#{$name}0),
+                400: var(--#{$name}0),
+                500: var(--#{$name}0),
+                600: var(--#{$name}0),
+                700: var(--#{$name}0),
+                800: var(--#{$name}0),
+                900: var(--#{$name}0),
+                A100: var(--#{$name}0),
+                A200: var(--#{$name}0),
+                A400: var(--#{$name}0),
+                A700: var(--#{$name}0),
+            )
+        );
+
+        $actions: (
+            50: var(--#{$name}11),
+            100: var(--#{$name}11),
+            200: var(--#{$name}12),
+            300: var(--#{$name}12),
+            400: var(--#{$name}13),
+            500: var(--#{$name}13),
+            600: var(--#{$name}14),
+            700: var(--#{$name}14),
+            800: var(--#{$name}15),
+            900: var(--#{$name}15),
+            A100: var(--#{$name}14),
+            A200: var(--#{$name}14),
+            A400: var(--#{$name}13),
+            A700: var(--#{$name}12),
+            A900: var(--#{$name}11),
+            contrast: (
+                50: var(--#{$name}0),
+                100: var(--#{$name}0),
+                200: var(--#{$name}6),
+                300: var(--#{$name}6),
+                400: var(--#{$name}0),
+                500: var(--#{$name}0),
+                600: var(--#{$name}6),
+                700: var(--#{$name}6),
+                800: var(--#{$name}0),
+                900: var(--#{$name}0),
+                A100: var(--#{$name}0),
+                A200: var(--#{$name}6),
+                A400: var(--#{$name}0),
+                A700: var(--#{$name}6),
+                A900: var(--#{$name}0),
+            )
+        );
+
+        // Create palettes based on the color maps.
+        // mat-palette($color-map, $default, $lighter, $darker, $text)
+        $primary-palette: mat.define-palette($primary);
+        $accent-palette: mat.define-palette($secondary, 200, 200, 200, 200);
+        $warn-palette: mat.define-palette($actions, 600, 600, 200, 200);
+
+        // Set the foreground/background color map.
+        // ðŸŽ¨ This might need to be tweeked depending on colors.
+        // We have two because we expect to create a light theme and a dark theme.
+        $light-theme-foreground: (
+            base:              mat.get-color-from-palette($dark, 500),
+            divider:           $dark-dividers,
+            dividers:          $dark-dividers,
+            disabled:          $dark-disabled-text,
+            disabled-button:   rgba(mat.get-color-from-palette($dark, 500), 0.26),
+            disabled-text:     $dark-disabled-text,
+            elevation:         black,
+            hint-text:         $dark-disabled-text,
+            secondary-text:    $dark-secondary-text,
+            icon:              rgba(mat.get-color-from-palette($dark, 500), 0.54),
+            icons:             rgba(mat.get-color-from-palette($dark, 500), 0.54),
+            text:              rgba(mat.get-color-from-palette($dark, 500), 0.87),
+            slider-min:        rgba(mat.get-color-from-palette($dark, 500), 0.87),
+            slider-off:        rgba(mat.get-color-from-palette($dark, 500), 0.26),
+            slider-off-active: rgba(mat.get-color-from-palette($dark, 500), 0.38),
+        );
+
+        $light-theme-background: (
+            status-bar: map_get($mat-grey, 300),
+            app-bar:    map_get($mat-grey, 100),
+            background: mat.get-color-from-palette($light, 700),
+            hover:      rgba(black, 0.04),
+            card:       mat.get-color-from-palette($light, 800),
+            dialog:     mat.get-color-from-palette($light, 800),
+            disabled-button: rgba(mat.get-color-from-palette($dark, 500), 0.12),
+            raised-button: mat.get-color-from-palette($light, 500),
+            focused-button: $dark-focused,
+            selected-button: map_get($mat-grey, 300),
+            selected-disabled-button: map_get($mat-grey, 400),
+            disabled-button-toggle: map_get($mat-grey, 200),
+            unselected-chip: map_get($mat-grey, 300),
+            disabled-list-option: map_get($mat-grey, 200),
+        );
+
+        $dark-theme-foreground: (
+            base:              mat.get-color-from-palette($light, 200),
+            divider:           $light-dividers,
+            dividers:          $light-dividers,
+            disabled:          $light-disabled-text,
+            disabled-button:   rgba(mat.get-color-from-palette($dark, 500), 0.3),
+            disabled-text:     $light-disabled-text,
+            elevation:         black,
+            hint-text:         $light-disabled-text,
+            secondary-text:    $light-secondary-text,
+            icon:              mat.get-color-from-palette($light, 200),
+            icons:             mat.get-color-from-palette($light, 200),
+            text:              mat.get-color-from-palette($light, 200),
+            slider-min:        mat.get-color-from-palette($dark, 500),
+            slider-off:        rgba(mat.get-color-from-palette($light, 500), 0.3),
+            slider-off-active: rgba(mat.get-color-from-palette($light, 500), 0.3),
+        );
+
+        $dark-theme-background: (
+            status-bar: mat.get-color-from-palette($light, 500),
+            app-bar:    map_get($mat-grey, 900),
+            background: mat.get-color-from-palette($dark, 500),
+            hover:      rgba(white, 0.04),
+            card:       mat.get-color-from-palette($dark, 100),
+            dialog:     mat.get-color-from-palette($dark, 100),
+            disabled-button: rgba(white, 0.12),
+            raised-button: map-get($mat-grey, 800),
+            focused-button: $light-focused,
+            selected-button: map_get($mat-grey, 900),
+            selected-disabled-button: map_get($mat-grey, 800),
+            disabled-button-toggle: black,
+            unselected-chip: map_get($mat-grey, 700),
+            disabled-list-option: black,
+        );
+
+        // Wrap all of the maps into a theme map.
+        $dark-theme: mat.define-dark-theme((
+          color: (
+            primary: $primary-palette,
+            accent: $accent-palette,
+            warn: $warn-palette,
+            is-dark: true,
+            foreground: $dark-theme-foreground,
+            background: $dark-theme-background,
+          ),
+          typography: $main-typography,
+        ));
+
+        $light-theme: mat.define-light-theme((
+          color: (
+            primary: $primary-palette,
+            accent: $accent-palette,
+            warn: $warn-palette,
+            is-dark: false,
+            foreground: $light-theme-foreground,
+            background: $light-theme-background,
+          ),
+          typography: $main-typography,
+        ));
+
+        // Check the theme-preference var and set the theme based on it.
+        // we also set some helper vars so we know what theme we picked.
+        // The text var is important, any text in the application should use it (or another color) so that it is readable when in light vs dark themes.
+        // ðŸŽ¨ Might need to change the value or the text var depending on colors picked.
+        @if $theme-preference == light {
+            --prefers-light: true;
+            --prefers-dark: false;
+
+            @include mat.all-component-themes($light-theme);
+        }
+
+        @if $theme-preference == dark {
+            --prefers-light: false;
+            --prefers-dark: true;
+
+            @include mat.all-component-themes($dark-theme);
+
+        }
+    }
+}

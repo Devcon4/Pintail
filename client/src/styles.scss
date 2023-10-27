@@ -1,5 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
-@import "theme.css";
+@import 'theme.scss';
+@include create-project(pin, true);
+
+a {
+  color: var(--pin-primary);
+  text-decoration: none;
+}
+
+mat-chip {
+  background-color: transparent !important;
+  color: var(--pin-on-background) !important;
+}
 
 h1, h2, h3, h4, h5, h6 {
   font: 700 24px/32px Roboto, Arial, sans-serif;
@@ -44,3 +55,6 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--pin-warning);
   border-color: var(--pin-warning);
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

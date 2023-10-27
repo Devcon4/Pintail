@@ -1,9 +1,15 @@
-<p>boards works!</p>
-
-<nav>
-  <ul>
-<ng-container *ngFor="let board of boards | async">
-  <li><a [routerLink]="board.path">{{ board.label }}</a></li>
-</ng-container>
-</ul>
-</nav>
+<div class="banner card card-color">
+  <h1 class="header">Pintail Retro</h1>
+  <button mat-icon-button color="secondary" (click)="toggleTheme()">
+    <mat-icon *ngIf="isDark | async">light_mode</mat-icon>
+    <mat-icon *ngIf="isLight | async">dark_mode</mat-icon>
+  </button>
+</div>
+<div class="card card-color content">
+  <h2 class="header">Boards</h2>
+  <div class="links">
+    <ng-container *ngFor="let board of boards | async">
+      <div class="board"><a [routerLink]="board.path">{{ board.label }}</a></div>
+    </ng-container>
+  </div>
+</div>

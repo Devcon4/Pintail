@@ -6,6 +6,6 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './toolkit.component.html',
-  styleUrls: ['./toolkit.component.css'],
+  styleUrls: ['./toolkit.component.scss'],
 })
 export default class ToolkitComponent {}
