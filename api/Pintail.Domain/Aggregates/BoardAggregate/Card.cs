@@ -2,7 +2,7 @@ using Pintail.Domain.Aggregates.BoardAggregate;
 using Pintail.Domain.Core;
 using Pintail.Domain.ValueObjects;
 
-namespace Pintail.Domain.Aggregates;
+namespace Pintail.Domain.Aggregates.BoardAggregate;
 
 public class Card: BaseEntity<Guid> {
   public Guid BoardId {get;set;}
