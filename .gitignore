@@ -3,3 +3,5 @@
 **/Pintail.db*
 /client/.angular
 /api/Pintail.WebApi/Pintail.sqlite
+/api/Pintail.WebApi/Pintail.sqlite-shm
+/api/Pintail.WebApi/Pintail.sqlite-wal

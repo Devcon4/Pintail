@@ -1,7 +1,7 @@
 {
   "clients": {
     "api": {
-      "host": "http://localhost:4540",
+      "host": "http://localhost:4640",
       "prefix": "api"
     }
   }

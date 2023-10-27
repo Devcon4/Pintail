@@ -1,0 +1,9 @@
+<a [routerLink]="'/home'">Boards</a>
+<p>bench works!</p>
+{{currentBoardId | async}}
+
+<ul>
+<ng-container *ngFor="let card of cards | async">
+  <li>{{card.id}}</li>
+</ng-container>
+</ul>

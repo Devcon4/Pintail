@@ -1,0 +1,9 @@
+<p>boards works!</p>
+
+<nav>
+  <ul>
+<ng-container *ngFor="let board of boards | async">
+  <li><a [routerLink]="board.path">{{ board.label }}</a></li>
+</ng-container>
+</ul>
+</nav>

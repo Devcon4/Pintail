@@ -1,11 +1,14 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  // {
-  //   path: 'dashboard',
-  //   loadComponent: () =>
-  //     import('../dashboard/dashboard-page/dashboard-page.component'),
-  // },
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
+  {
+    path: 'workbench/:key',
+    loadComponent: () => import('../workbench/bench/bench.component'),
+  },
+  {
+    path: 'home',
+    loadComponent: () => import('../home/boards/boards.component'),
+  },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
