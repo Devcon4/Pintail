@@ -170,7 +170,7 @@
         --#{$name}-on-primary:        var(--light, var(--#{$name}4))  var(--dark, var(--#{$name}4));
         --#{$name}-on-secondary:      var(--light, var(--#{$name}4))  var(--dark, var(--#{$name}4));
         --#{$name}-on-background:     var(--light, var(--#{$name}2))  var(--dark, var(--#{$name}4));
-        --#{$name}-on-surface:        var(--light, var(--#{$name}7))  var(--dark, var(--#{$name}4));
+        --#{$name}-on-surface:        var(--light, var(--#{$name}2))  var(--dark, var(--#{$name}4));
         --#{$name}-on-warning:        var(--light, var(--#{$name}4))  var(--dark, var(--#{$name}4));
         --#{$name}-on-error:          var(--light, var(--#{$name}4))  var(--dark, var(--#{$name}4));
 
