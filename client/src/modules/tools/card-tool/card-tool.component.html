@@ -1,18 +1,34 @@
-<ng-container *ngIf="isEditing | async as editState">
-    <ng-container [ngTemplateOutlet]="editState === 'Edit' ? edit : display"></ng-container>
-</ng-container>
-
+<div class="tool" cdkDrag (cdkDragReleased)="drop($event)">
+  <ng-container *ngIf="isEditing | async as editState">
+    <ng-container
+      [ngTemplateOutlet]="editState === 'Edit' ? edit : display"></ng-container>
+  </ng-container>
+</div>
 <ng-template #edit>
-  <div class="display">
-    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+  <div class="edit">
+    <mat-form-field
+      class="card-font"
+      appearance="outline"
+      subscriptSizing="dynamic">
       <mat-label>Body</mat-label>
-      <textarea cdkTextareaAutosize matInput [formControl]="bodyControl"></textarea>
+      <textarea
+        class="density-3"
+        #text
+        cdkTextareaAutosize
+        matInput
+        [formControl]="bodyControl"></textarea>
     </mat-form-field>
-    <button class="trash" mat-icon-button (click)="deleteCard()"><mat-icon>delete_outlined</mat-icon></button>
+    <button class="trash" mat-icon-button (click)="deleteCard()">
+      <mat-icon>delete_outlined</mat-icon>
+    </button>
   </div>
 </ng-template>
 
 <ng-template #display>
-  {{card.id}}
-  {{card.body}}
+  <div class="display card-font">
+    <ng-container *ngIf="!card.body">
+      <div class="empty">Note:</div>
+    </ng-container>
+    {{ card.body }}
+  </div>
 </ng-template>

@@ -34,6 +34,10 @@ export class CardState {
       .put(`/api/boards/${card.boardId}/cards/${card.id}`, card)
       .subscribe(() => this.getCards(card.boardId));
   }
+
+  public clearCards() {
+    this.cards.next([]);
+  }
 }
 
 export type CreateCardCommand = {

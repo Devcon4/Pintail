@@ -7,6 +7,7 @@
 
 .kit {
   flex-direction: row;
+  justify-content: space-between;
   min-width: 0 !important;
   gap: 12px;
   border-top: 4px solid;
@@ -22,4 +23,8 @@ button.isCurrent {
   background-color: var(--pin-primary);
   border-color: var(--pin-primary);
   color: var(--pin-on-primary);
+}
+
+.end {
+  align-self: flex-end;
 }

@@ -1,14 +1,15 @@
-<a [routerLink]="'/home'">Boards</a>
-<div class="content" CdkDropList (click)="useTool($event)">
-  <p>bench works!</p>
-  {{currentBoardId | async}}
+<div
+  id="workbench"
+  class="content"
+  *ngIf="cards | async; else loading"
+  (click)="useTool($event)"></div>
 
-  <ul>
-  <ng-container *ngFor="let card of cards | async">
-    <li>{{card.id}}</li>
-  </ng-container>
-  </ul>
-</div>
 <div class="toolkit">
   <pin-toolkit></pin-toolkit>
 </div>
+
+<ng-template #loading>
+  <div class="content loading">
+    <mat-spinner diameter="48"></mat-spinner>
+  </div>
+</ng-template>

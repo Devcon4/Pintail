@@ -7,3 +7,19 @@
 .content {
   flex: 1;
 }
+
+.toolkit {
+  z-index: 10000;
+}
+
+.loading {
+  justify-content: center;
+  display: flex;
+}
+
+.test-card {
+  width: 200px;
+  height: 200px;
+  background-color: var(--pin-primary);
+  color: var(--pin-on-primary);
+}

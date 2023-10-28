@@ -1,22 +1,28 @@
+import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  OnInit,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { ToolState, ToolType } from '../../../states/tool.state';
-import { Observable, map } from 'rxjs';
+import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
+import { Observable, map } from 'rxjs';
+import { ToolState, ToolType } from '../../../states/tool.state';
 
 @Component({
   selector: 'pin-toolkit',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule, MatTooltipModule],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+    RouterModule,
+  ],
   templateUrl: './toolkit.component.html',
   styleUrls: ['./toolkit.component.scss'],
 })

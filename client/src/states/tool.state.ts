@@ -1,5 +1,5 @@
 import { OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
-import { Injectable } from '@angular/core';
+import { ComponentRef, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class ToolState {
 
   public saveEditing = new BehaviorSubject<EditingModel | undefined>(undefined);
 
-  public overlays = new BehaviorSubject<OverlayLookup>({});
+  public tools = new BehaviorSubject<ToolLookup>({});
 
   public setCurrentTool(tool: ToolType) {
     this.currentTool.next(tool);
@@ -28,27 +28,39 @@ export class ToolState {
     this.currentEditing.next(undefined);
   }
 
-  public setOverlay(id: string, overlay: OverlayRef) {
-    this.overlays.next({
-      ...this.overlays.getValue(),
-      [id]: overlay,
+  public clearTools() {
+    Object.entries(this.tools.getValue()).forEach(([key, [o, c]]) => {
+      c.destroy();
+      o.dispose();
+    });
+    this.tools.next({});
+  }
+
+  public setTool(id: string, tool: ToolRef) {
+    this.tools.next({
+      ...this.tools.getValue(),
+      [id]: tool,
     });
   }
 
-  public removeOverlay(id: string) {
-    const overlays = this.overlays.getValue();
-    overlays[id]?.dispose();
+  public removeTool(id: string) {
+    const overlays = this.tools.getValue();
+    const [o, c] = overlays[id];
+    c.destroy();
+    o?.dispose();
     delete overlays[id];
-    this.overlays.next(overlays);
+    this.tools.next(overlays);
   }
 
-  public updateOverlayPosition(id: string, strategy: PositionStrategy) {
-    const overlays = this.overlays.getValue();
-    overlays[id]?.updatePositionStrategy(strategy);
-    this.overlays.next(overlays);
+  public updateToolPosition(id: string, strategy: PositionStrategy) {
+    const overlays = this.tools.getValue();
+    const [o, c] = overlays[id];
+    o?.updatePositionStrategy(strategy);
+    this.tools.next(overlays);
   }
 }
-export type OverlayLookup = Record<string, OverlayRef>;
+export type ToolRef = [OverlayRef, ComponentRef<unknown>];
+export type ToolLookup = Record<string, ToolRef>;
 export type ToolType = 'card' | 'label';
 
 export type EditingModel = {

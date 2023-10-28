@@ -6,7 +6,6 @@ const BaseUriHandler: HttpInterceptorFn = (req, next) => {
   const configService = inject(ConfigService);
   const appClients = configService.AppConfig.getValue()?.clients;
 
-  console.log(configService.AppConfig.getValue());
   if (!appClients) {
     throw new Error('No clients found in app config; cannot set base uri.');
   }

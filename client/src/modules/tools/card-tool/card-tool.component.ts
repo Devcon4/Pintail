@@ -1,16 +1,22 @@
-import { Component, HostListener, Inject, InjectionToken } from '@angular/core';
+import { CdkDrag, CdkDragRelease } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Inject,
+  InjectionToken,
+  ViewChild,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { debounceTime, filter, map, startWith, tap } from 'rxjs';
 import { Card, CardState } from '../../../states/card.state';
 import { EditingModel, ToolState, ToolType } from '../../../states/tool.state';
-import { Subscription, filter, map, startWith, tap } from 'rxjs';
-import CustomOperators from '../../../utils/custom-operators';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { CdkDrag, CdkDragDrop, CdkDragRelease } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'pin-card-tool',
@@ -35,23 +41,34 @@ export class CardToolComponent {
     private cardState: CardState,
     @Inject(CARD_TOOL_DATA) public card: CardTool
   ) {
-    this.toolState.saveEditing
+    this.bodyControl.valueChanges
       .pipe(
         takeUntilDestroyed(),
-        IsCurrentTool('card', this.card.id),
-        filter(
-          (l) => l === 'Edit' && this.bodyControl.value !== this.card.body
-        ),
+        debounceTime(120),
+        filter((l) => l !== this.card.body),
         tap(() => this.save())
       )
       .subscribe();
+    // this.toolState.saveEditing
+    //   .pipe(
+    //     takeUntilDestroyed(),
+    //     IsCurrentTool('card', this.card.id),
+    //     filter(
+    //       (l) => l === 'Edit' && this.bodyControl.value !== this.card.body
+    //     ),
+    //     tap(() => this.save())
+    //   )
+    //   .subscribe();
   }
+
+  @ViewChild('text') textareaRef: ElementRef = null!;
 
   public bodyControl = new FormControl(this.card.body, { nonNullable: true });
 
   public isEditing = this.toolState.currentEditing.pipe(
     IsCurrentTool('card', this.card.id),
-    startWith('Display')
+    startWith('Display'),
+    tap((l) => setTimeout(() => this.textareaRef?.nativeElement?.focus()))
   );
 
   @HostListener('click')
@@ -62,18 +79,16 @@ export class CardToolComponent {
     });
   };
 
-  @HostListener('cdkDragDropped')
-  public drop(event: CdkDragDrop<unknown>) {
-    console.log('dropped');
+  public drop = (event: CdkDragRelease<any>) => {
+    var rect = event.source.element.nativeElement.getBoundingClientRect();
+    var pos = { x: rect.x, y: rect.y };
     this.cardState.updateCard({
       ...this.card,
-      x: event.dropPoint.x,
-      y: event.dropPoint.y,
+      ...pos,
     });
-  }
+  };
 
   public save = () => {
-    console.log('saving', this.card.id);
     this.cardState.updateCard({
       ...this.card,
       body: this.bodyControl.value,
