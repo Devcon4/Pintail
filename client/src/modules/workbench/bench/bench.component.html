@@ -1,9 +1,14 @@
 <a [routerLink]="'/home'">Boards</a>
-<p>bench works!</p>
-{{currentBoardId | async}}
+<div class="content" CdkDropList (click)="useTool($event)">
+  <p>bench works!</p>
+  {{currentBoardId | async}}
 
-<ul>
-<ng-container *ngFor="let card of cards | async">
-  <li>{{card.id}}</li>
-</ng-container>
-</ul>
+  <ul>
+  <ng-container *ngFor="let card of cards | async">
+    <li>{{card.id}}</li>
+  </ng-container>
+  </ul>
+</div>
+<div class="toolkit">
+  <pin-toolkit></pin-toolkit>
+</div>

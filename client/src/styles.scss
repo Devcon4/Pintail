@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
 @import 'theme.scss';
 @include create-project(pin, true);
 
@@ -58,3 +59,45 @@ h1, h2, h3, h4, h5, h6 {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.card h1 {
+  flex: 1;
+  font-size: 42px;
+  text-align: center;
+}
+
+.card {
+  background-color: var(--pin-surface-secondary);
+  max-width: 1080px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  border-radius: 5px;
+
+  padding: 12px;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,.2));
+}
+
+.header {
+  font-size: 38px;
+  font-weight: 200;
+  padding: 24px 0;
+  position: sticky;
+  top: 0px;
+}
+
+// Material density overrides. Only works if in a globalstyle because of mdc.
+.density-3 {
+  @include mat.all-component-densities(-3);
+}
+.density-2 {
+  @include mat.all-component-densities(-2);
+}
+.density-1 {
+  @include mat.all-component-densities(-1);
+}
+.density-0 {
+  @include mat.all-component-densities(0);
+}

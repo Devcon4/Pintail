@@ -1,0 +1,25 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+}
+
+.kit {
+  flex-direction: row;
+  min-width: 0 !important;
+  gap: 12px;
+  border-top: 4px solid;
+
+  border-color: var(--pin-secondary);
+}
+
+button {
+  transition: all linear 120ms;
+}
+
+button.isCurrent {
+  background-color: var(--pin-primary);
+  border-color: var(--pin-primary);
+  color: var(--pin-on-primary);
+}

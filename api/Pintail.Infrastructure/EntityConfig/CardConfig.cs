@@ -14,7 +14,7 @@ public class CardConfig : IEntityTypeConfiguration<Card>
       p.Property(p => p.Y).HasColumnName("position_y");
     });
     builder.Property(c => c.Body).HasConversion(
-      v => v.ToString(),
+      v => v.Value,
       v => new TextMultiline(v!)
     ).HasColumnName("body");
   }

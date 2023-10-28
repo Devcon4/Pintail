@@ -16,7 +16,32 @@ export class CardState {
       .get<Card[]>(`/api/boards/${boardId}/cards`)
       .subscribe((cards) => this.cards.next(cards));
   }
+
+  public createCard(card: CreateCardCommand) {
+    this.http
+      .post(`/api/boards/${card.boardId}/cards`, card)
+      .subscribe(() => this.getCards(card.boardId));
+  }
+
+  public deleteCard(card: Card) {
+    this.http
+      .delete(`/api/boards/${card.boardId}/cards/${card.id}`)
+      .subscribe(() => this.getCards(card.boardId));
+  }
+
+  public updateCard(card: Card) {
+    this.http
+      .put(`/api/boards/${card.boardId}/cards/${card.id}`, card)
+      .subscribe(() => this.getCards(card.boardId));
+  }
 }
+
+export type CreateCardCommand = {
+  boardId: string;
+  x: number;
+  y: number;
+  body: string;
+};
 
 export type Card = {
   id: string;

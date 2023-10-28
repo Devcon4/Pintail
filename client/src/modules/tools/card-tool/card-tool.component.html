@@ -1,0 +1,18 @@
+<ng-container *ngIf="isEditing | async as editState">
+    <ng-container [ngTemplateOutlet]="editState === 'Edit' ? edit : display"></ng-container>
+</ng-container>
+
+<ng-template #edit>
+  <div class="display">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Body</mat-label>
+      <textarea cdkTextareaAutosize matInput [formControl]="bodyControl"></textarea>
+    </mat-form-field>
+    <button class="trash" mat-icon-button (click)="deleteCard()"><mat-icon>delete_outlined</mat-icon></button>
+  </div>
+</ng-template>
+
+<ng-template #display>
+  {{card.id}}
+  {{card.body}}
+</ng-template>

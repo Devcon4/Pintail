@@ -1,15 +1,36 @@
-<div class="banner card card-color">
+<div class="banner card">
   <h1 class="header">Pintail Retro</h1>
   <button mat-icon-button color="secondary" (click)="toggleTheme()">
     <mat-icon *ngIf="isDark | async">light_mode</mat-icon>
     <mat-icon *ngIf="isLight | async">dark_mode</mat-icon>
   </button>
 </div>
-<div class="card card-color content">
+<div class="card content">
   <h2 class="header">Boards</h2>
+  <form (ngSubmit)="createBoard()">
+    <mat-form-field appearance="outline">
+      <mat-label>Create Board</mat-label>
+      <input
+        required
+        matInput
+        placeholder="Title"
+        [formControl]="boardControl" />
+      <button matSuffix type="submit" mat-icon-button matTooltip="Create">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
   <div class="links">
     <ng-container *ngFor="let board of boards | async">
-      <div class="board"><h3>{{board.title}}</h3><a [routerLink]="board.path">{{ board.label }}</a></div>
+      <div class="board">
+        <h3 class="board-title">
+          {{ board.label }}
+          <button mat-icon-button (click)="deleteBoard(board.id)">
+            <mat-icon>delete_outlined</mat-icon>
+          </button>
+        </h3>
+        <a [routerLink]="board.path">{{ board.title }}</a>
+      </div>
     </ng-container>
   </div>
 </div>

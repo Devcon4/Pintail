@@ -19,7 +19,8 @@ public class GetCards {
         throw new NotFoundException(request.BoardId.ToString(), "Board not found with matching id");
       }
 
-      return board.Cards.Select(c => new CardDto(c)).ToList();
+      var res = board.Cards.Select(c => new CardDto(c)).ToList();
+      return res;
     }
   }
 }

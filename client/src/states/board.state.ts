@@ -29,10 +29,24 @@ export class BoardState {
       this.boards.next(boards);
     });
   }
+
+  public createBoard(board: CreateBoardCommand) {
+    this.http.post('/api/boards', board).subscribe(() => this.getBoards());
+  }
+
+  public deleteBoard(boardId: string) {
+    this.http
+      .delete(`/api/boards/${boardId}`)
+      .subscribe(() => this.getBoards());
+  }
 }
 
 export type Board = {
   id: string;
   key: string;
+  title: string;
+};
+
+export type CreateBoardCommand = {
   title: string;
 };

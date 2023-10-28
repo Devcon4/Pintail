@@ -1,1 +1,17 @@
-<p>toolkit works!</p>
+<div class="card kit">
+  <ng-container *ngFor="let tool of toolkitItems">
+    <ng-container [ngTemplateOutlet]="tool.template" [ngTemplateOutletContext]="{action: tool.action, isCurrent: tool.isCurrent, tooltip: tool.tooltip}"></ng-container>
+  </ng-container>
+</div>
+
+<ng-template #card let-action="action" let-isCurrent="isCurrent"  let-tooltip="tooltip">
+  <button mat-icon-button (click)="action()" [class.isCurrent]="isCurrent | async" [matTooltip]="tooltip">
+    <mat-icon>post_add</mat-icon>
+  </button>
+</ng-template>
+
+<ng-template #label let-action="action" let-isCurrent="isCurrent" let-tooltip="tooltip">
+  <button mat-icon-button (click)="action()" [class.isCurrent]="isCurrent | async" [matTooltip]="tooltip">
+    <mat-icon>text_fields</mat-icon>
+  </button>
+</ng-template>

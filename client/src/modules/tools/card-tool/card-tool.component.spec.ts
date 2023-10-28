@@ -1,15 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import ToolkitComponent from './toolkit.component';
 
-describe('ToolkitComponent', () => {
-  let component: ToolkitComponent;
-  let fixture: ComponentFixture<ToolkitComponent>;
+import { CardToolComponent } from './card-tool.component';
+
+describe('CardToolComponent', () => {
+  let component: CardToolComponent;
+  let fixture: ComponentFixture<CardToolComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ToolkitComponent],
+      imports: [CardToolComponent],
     });
-    fixture = TestBed.createComponent(ToolkitComponent);
+    fixture = TestBed.createComponent(CardToolComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
